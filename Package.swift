@@ -23,7 +23,30 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "FirehouseModel",
-            dependencies: ["XMLTree"]),
+            dependencies: ["XMLTree"],
+            sources: [
+              "DefaultOption.swift",
+              "Layout.swift",
+              "MenuItem.swift",
+              "Option.swift",
+              "PizzaConfig.swift",
+              "SalesGroups.swift",
+              "Submenu.swift",
+              "Entry.swift",
+              "Menu.swift",
+              "MenuItemInclusion.swift",
+              "OptionGroup.swift",
+              "QuickCombos.swift",
+              "SalesItem.swift",
+              "SubmenuInclusion.swift",
+              "Group.swift",
+              "MenuInclusion.swift",
+              "ModifierAction.swift",
+              "OptionSet.swift",
+              "Restriction.swift",
+              "SalesItemOption.swift",
+              "SubmenuInfo.swift"
+            ]),
         .testTarget(
             name: "FirehouseModelTests",
             dependencies: ["FirehouseModel"]),

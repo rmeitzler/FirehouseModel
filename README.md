@@ -1,3 +1,3 @@
 # FirehouseModel
 
-A description of this package.
+Decodable data model

@@ -9,13 +9,13 @@ import SwiftUI
 import XMLTree
 
 public struct Option {
-  var id: String
-  var isFolder: String
-  var modifierGroupId: String
-  var price: String
-  var modifierAction: String
-  var weight: String
-  var customFields: String?
+  public var id: String
+  public var isFolder: String
+  public var modifierGroupId: String
+  public var price: String
+  public var modifierAction: String
+  public var weight: String
+  public var customFields: String?
 }
 
 extension Option: Decodable {

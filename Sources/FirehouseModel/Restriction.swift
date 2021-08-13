@@ -9,10 +9,10 @@ import SwiftUI
 import XMLTree
 
 public struct Restriction {
-  var importAction: String?
-  var dayOfWeek: String
-  var startTime: String?
-  var endTime: String?
+  public var importAction: String?
+  public var dayOfWeek: String
+  public var startTime: String?
+  public var endTime: String?
 }
 
 extension Restriction: Decodable {

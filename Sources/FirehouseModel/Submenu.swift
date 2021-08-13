@@ -9,19 +9,19 @@ import SwiftUI
 import XMLTree
 
 public struct Submenu {
-  var id: String
-  var name: String
-  var description: String
-  var isVisible: String
-  var isSelectable: String
-  var sourceSubMenuId: String
-  var isShowHeader: String
-  var supportedOrderModes: String
+  public var id: String
+  public var name: String
+  public var description: String
+  public var isVisible: String
+  public var isSelectable: String
+  public var sourceSubMenuId: String
+  public var isShowHeader: String
+  public var supportedOrderModes: String
   
-  var menuItemIds: [String]?
+  public var menuItemIds: [String]?
   
-  var restrictions: [Restriction]?
-  var customFields: String?
+  public var restrictions: [Restriction]?
+  public var customFields: String?
 }
 
 extension Submenu: Decodable {

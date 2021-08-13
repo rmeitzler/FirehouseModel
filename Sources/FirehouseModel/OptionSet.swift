@@ -9,10 +9,10 @@ import SwiftUI
 import XMLTree
 
 public struct OptionSet {
-  var id: String
-  var name: String
-  var isVisible: String
-  var groups: [Group]?
+  public var id: String
+  public var name: String
+  public var isVisible: String
+  public var groups: [Group]?
 }
 
 extension OptionSet: Decodable {

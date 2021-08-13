@@ -9,11 +9,11 @@ import SwiftUI
 import XMLTree
 
 public struct ModifierAction {
-  var modifierActionGroupId: String
-  var modifierAction: String
-  var action: String
-  var displayName: String
-  var displayShortName: String
+  public var modifierActionGroupId: String
+  public var modifierAction: String
+  public var action: String
+  public var displayName: String
+  public var displayShortName: String
   
 }
 

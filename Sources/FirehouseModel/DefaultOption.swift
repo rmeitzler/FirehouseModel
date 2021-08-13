@@ -9,13 +9,13 @@ import SwiftUI
 import XMLTree
 
 public struct DefaultOption {
-  var id: String
-  var entityType: String
-  var itemOptionGroupId: String
-  var salesItemOptionId: String
-  var defaultReason: String
-  var defaultQuantity: String
-  var modifierAction: String
+  public var id: String
+  public var entityType: String
+  public var itemOptionGroupId: String
+  public var salesItemOptionId: String
+  public var defaultReason: String
+  public var defaultQuantity: String
+  public var modifierAction: String
 }
 
 extension DefaultOption: Decodable {

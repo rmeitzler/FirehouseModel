@@ -9,7 +9,7 @@ import SwiftUI
 import XMLTree
 
 public struct MenuInclusion {
-  var entries: [Entry]
+  public var entries: [Entry]
 }
 
 extension MenuInclusion: Decodable {

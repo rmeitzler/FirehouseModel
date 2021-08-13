@@ -9,8 +9,8 @@ import SwiftUI
 import XMLTree
 
 public struct SubmenuInfo {
-  var id: String
-  var levelNumber: String
+  public var id: String
+  public var levelNumber: String
 }
 
 extension SubmenuInfo: Decodable {

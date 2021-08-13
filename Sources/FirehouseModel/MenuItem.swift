@@ -9,29 +9,29 @@ import SwiftUI
 import XMLTree
 
 public struct MenuItem {
-  var id: String
-  var name: String
-  var displayName: String
-  var description: String
-  var defaultItemId: String
-  var isVisible: String
-  var itemOrderingMode: String
-  var forceInitialQuantitySelection: String
-  var layoutBindingTag: String?
-  var baseImageName: String?
-  var sourceItemId: String
-  var listImageName: String?
-  var promotionType: String
-  var promotionDescription: String?
-  var promotionMenuItemId: String
-  var promoId: String
-  var price: String
-  var caloricServingUnit: String?
-  var supportedOrderModes: String
-  var salesItemIds: [String]
-  var salesGroups: String?
-  var restrictions: [Restriction]?
-  var customFields: String?
+  public var id: String
+  public var name: String
+  public var displayName: String
+  public var description: String
+  public var defaultItemId: String
+  public var isVisible: String
+  public var itemOrderingMode: String
+  public var forceInitialQuantitySelection: String
+  public var layoutBindingTag: String?
+  public var baseImageName: String?
+  public var sourceItemId: String
+  public var listImageName: String?
+  public var promotionType: String
+  public var promotionDescription: String?
+  public var promotionMenuItemId: String
+  public var promoId: String
+  public var price: String
+  public var caloricServingUnit: String?
+  public var supportedOrderModes: String
+  public var salesItemIds: [String]
+  public var salesGroups: String?
+  public var restrictions: [Restriction]?
+  public var customFields: String?
   
   enum CodingKeys: String, CodingKey {
     case id = "Id"

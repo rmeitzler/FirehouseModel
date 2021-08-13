@@ -9,9 +9,9 @@ import SwiftUI
 import XMLTree
 
 public struct Entry {
-  var id: String
-  var siteGroupId: String
-  var isIncluded: String
+  public var id: String
+  public var siteGroupId: String
+  public var isIncluded: String
 }
 
 extension Entry: Decodable {

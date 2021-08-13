@@ -9,26 +9,26 @@ import SwiftUI
 import XMLTree
 
 public struct SalesItem {
-  var id: String
-  var itemId: String
-  var name: String
-  var displayName: String
-  var description: String
-  var receiptDescription: String
-  var price: String
-  var itemOptionSetId: String
-  var isVisible: String
-  var canBeOrderedAsIs: String
-  var itemOrderingMode: String
-  var sourceItemId: String
-  var taxGroupId: String
-  var portionCount: String
-  var quantityMultiplier: String
-  var includedModifierCount: String
-  var discountPrice: String
-  var freeModifierCount: String
-  var caloricValue: String?
-  var customFields: String?
+  public var id: String
+  public var itemId: String
+  public var name: String
+  public var displayName: String
+  public var description: String
+  public var receiptDescription: String
+  public var price: String
+  public var itemOptionSetId: String
+  public var isVisible: String
+  public var canBeOrderedAsIs: String
+  public var itemOrderingMode: String
+  public var sourceItemId: String
+  public var taxGroupId: String
+  public var portionCount: String
+  public var quantityMultiplier: String
+  public var includedModifierCount: String
+  public var discountPrice: String
+  public var freeModifierCount: String
+  public var caloricValue: String?
+  public var customFields: String?
 }
 
 extension SalesItem: Decodable {

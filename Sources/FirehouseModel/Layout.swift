@@ -9,21 +9,21 @@ import SwiftUI
 import XMLTree
 
 public struct Layout {
-  var menuItems: [MenuItem]
-  var menuItemInclusion: MenuItemInclusion?
-  var salesItems: [SalesItem]
-  var salesGroups: SalesGroups?
-  var salesItemOptions: [SalesItemOption]
-  var submenus: [Submenu]
-  var submenuInclusion: SubmenuInclusion?
-  var menus: [Menu]
-  var menuInclusion: MenuInclusion
-  var defaultOptions: [DefaultOption]
-  var optionGroups: [OptionGroup]
-  var optionSets: [OptionSet]
-  var modifierActionMaps: [ModifierAction]
-  var quickCombos: QuickCombos?
-  var pizzaConfig: PizzaConfig
+  public var menuItems: [MenuItem]
+  public var menuItemInclusion: MenuItemInclusion?
+  public var salesItems: [SalesItem]
+  public var salesGroups: SalesGroups?
+  public var salesItemOptions: [SalesItemOption]
+  public var submenus: [Submenu]
+  public var submenuInclusion: SubmenuInclusion?
+  public var menus: [Menu]
+  public var menuInclusion: MenuInclusion
+  public var defaultOptions: [DefaultOption]
+  public var optionGroups: [OptionGroup]
+  public var optionSets: [OptionSet]
+  public var modifierActionMaps: [ModifierAction]
+  public var quickCombos: QuickCombos?
+  public var pizzaConfig: PizzaConfig
   
   enum CodingKeys: String, CodingKey {
     case menuItems = "MenuItems"

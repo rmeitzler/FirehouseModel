@@ -9,26 +9,26 @@ import SwiftUI
 import XMLTree
 
 public struct OptionGroup {
-  var id: String
-  var isFolder: String
-  var name: String
-  var displayName: String
-  var description: String
-  var modifierActionGroupId: String
-  var isVisible: String
-  var minimumItems: String
-  var maximumItems: String
-  var perOptionMaximum: String
-  var perOptionMinimum: String
-  var maxDistinctOptions: String
-  var sourceModifierGroupId: String
-  var itemOrderingMode: String
-  var freeModifiers: String
-  var hideModifier: String
+  public var id: String
+  public var isFolder: String
+  public var name: String
+  public var displayName: String
+  public var description: String
+  public var modifierActionGroupId: String
+  public var isVisible: String
+  public var minimumItems: String
+  public var maximumItems: String
+  public var perOptionMaximum: String
+  public var perOptionMinimum: String
+  public var maxDistinctOptions: String
+  public var sourceModifierGroupId: String
+  public var itemOrderingMode: String
+  public var freeModifiers: String
+  public var hideModifier: String
   
-  var options: [Option]
+  public var options: [Option]
   
-  var customFields: String?
+  public var customFields: String?
 }
 
 extension OptionGroup: Decodable {

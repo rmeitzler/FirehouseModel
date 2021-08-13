@@ -9,16 +9,16 @@ import SwiftUI
 import XMLTree
 
 public struct Menu {
-  var id: String
-  var name: String
-  var isVisible: String
-  var sourceMenuId: String
-  var menuType: String
-  var externalId: String
-  var supportedOrderModes: String
-  var menuAttributes: String
+  public var id: String
+  public var name: String
+  public var isVisible: String
+  public var sourceMenuId: String
+  public var menuType: String
+  public var externalId: String
+  public var supportedOrderModes: String
+  public var menuAttributes: String
   
-  var submenus: [SubmenuInfo]
+  public var submenus: [SubmenuInfo]
 }
 
 extension Menu: Decodable {

@@ -9,17 +9,17 @@ import SwiftUI
 import XMLTree
 
 public struct SalesItemOption {
-  var id: String
-  var modifierId: String
-  var name: String
-  var displayName: String
-  var description: String
-  var receiptDescription: String
-  var isVisible: String
-  var itemOptionSetId: String
-  var sourceModifierId: String
-  var taxGroupId: String
-  var customFields: String?
+  public var id: String
+  public var modifierId: String
+  public var name: String
+  public var displayName: String
+  public var description: String
+  public var receiptDescription: String
+  public var isVisible: String
+  public var itemOptionSetId: String
+  public var sourceModifierId: String
+  public var taxGroupId: String
+  public var customFields: String?
 }
 
 extension SalesItemOption: Decodable {

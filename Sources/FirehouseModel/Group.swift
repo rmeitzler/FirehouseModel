@@ -9,10 +9,10 @@ import SwiftUI
 import XMLTree
 
 public struct Group {
-  var id: String
-  var isHalfSectionAllowed: String
-  var isThirdSectionAllowed: String
-  var isFourthSectionAllowed: String
+  public var id: String
+  public var isHalfSectionAllowed: String
+  public var isThirdSectionAllowed: String
+  public var isFourthSectionAllowed: String
 }
 
 extension Group: Decodable {

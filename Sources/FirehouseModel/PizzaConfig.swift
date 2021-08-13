@@ -9,17 +9,17 @@ import SwiftUI
 import XMLTree
 
 public struct PizzaConfig {
-  var pizzaCategory: String
-  var portionPricingMethod: String
-  var portionPricingPercent: String
-  var section1Id: String
-  var section1Type: String
-  var section2Id: String
-  var section2Type: String
-  var section3Id: String
-  var section3Type: String
-  var section4Id: String
-  var section4Type: String
+  public var pizzaCategory: String
+  public var portionPricingMethod: String
+  public var portionPricingPercent: String
+  public var section1Id: String
+  public var section1Type: String
+  public var section2Id: String
+  public var section2Type: String
+  public var section3Id: String
+  public var section3Type: String
+  public var section4Id: String
+  public var section4Type: String
   
 }
 

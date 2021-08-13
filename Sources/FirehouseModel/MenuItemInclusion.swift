@@ -8,17 +8,17 @@
 import SwiftUI
 import XMLTree
 
-struct MenuItemInclusion: Decodable, Hashable, XMLTreeDecodable {
+public struct MenuItemInclusion: Decodable, Hashable, XMLTreeDecodable {
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     
   }
   
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     self.init()
   }
   
-  init(){
+  public init(){
     
   }
     

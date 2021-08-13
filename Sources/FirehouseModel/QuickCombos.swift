@@ -8,16 +8,16 @@
 import SwiftUI
 import XMLTree
 
-struct QuickCombos: Decodable, Hashable, XMLTreeDecodable {
-  init(from decoder: Decoder) throws {
+public struct QuickCombos: Decodable, Hashable, XMLTreeDecodable {
+  public init(from decoder: Decoder) throws {
     
   }
   
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     self.init()
   }
   
-  init(){
+  public init(){
     
   }
   

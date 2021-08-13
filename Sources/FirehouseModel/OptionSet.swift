@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct OptionSet {
+public struct OptionSet {
   var id: String
   var name: String
   var isVisible: String
@@ -23,7 +23,7 @@ extension OptionSet: Decodable {
      case groups = "Groups"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
     id = try values.decode(String.self, forKey: .id)
@@ -38,7 +38,7 @@ extension OptionSet: Hashable {
 }
 
 extension OptionSet: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     //print("groups:\(xml.child(named: "Groups"))")
     let grps: [Group]? = try xml.child(named: "Groups")?.children.decodeAll()
     

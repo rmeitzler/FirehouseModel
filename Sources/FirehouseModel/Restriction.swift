@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct Restriction {
+public struct Restriction {
   var importAction: String?
   var dayOfWeek: String
   var startTime: String?
@@ -22,6 +22,15 @@ extension Restriction: Decodable {
     case startTime = "StartTime"
     case endTime = "EndTime"
   }
+  
+  public init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    
+    self.init(importAction: try values.decodeIfPresent(String.self, forKey: .importAction),
+              dayOfWeek: try values.decode(String.self, forKey: .dayOfWeek),
+              startTime: try values.decodeIfPresent(String.self, forKey: .startTime),
+              endTime: try values.decodeIfPresent(String.self, forKey: .endTime))
+  }
 }
 
 extension Restriction: Hashable {
@@ -30,7 +39,7 @@ extension Restriction: Hashable {
 
 extension Restriction: XMLTreeDecodable {
   
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     try self.init(
       importAction: xml.attrIfPresent("ImportAction"),
       dayOfWeek: xml.attr("DayOfWeek"),

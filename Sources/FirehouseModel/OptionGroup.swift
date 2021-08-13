@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct OptionGroup {
+public struct OptionGroup {
   var id: String
   var isFolder: String
   var name: String
@@ -53,7 +53,7 @@ extension OptionGroup: Decodable {
      case customFields = "CustomFields"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
   
     id = try values.decode(String.self, forKey: .id)
@@ -82,7 +82,7 @@ extension OptionGroup: Hashable {
 }
 
 extension OptionGroup: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     
     guard let options: [Option] = try xml.child(named: "Options")?.children.decodeAll() else {
       throw XMLTreeError.couldNotDecodeClass(String(describing: [Option].self))

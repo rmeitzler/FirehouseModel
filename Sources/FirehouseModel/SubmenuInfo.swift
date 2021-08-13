@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct SubmenuInfo {
+public struct SubmenuInfo {
   var id: String
   var levelNumber: String
 }
@@ -19,7 +19,7 @@ extension SubmenuInfo: Decodable {
     case levelNumber = "LevelNumber"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
   
       id = try values.decode(String.self, forKey: .id)
@@ -32,7 +32,7 @@ extension SubmenuInfo: Hashable {
 }
 
 extension SubmenuInfo: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     try self.init(id: xml.attr("Id"), levelNumber: xml.attr("LevelNumber"))
   }
 }

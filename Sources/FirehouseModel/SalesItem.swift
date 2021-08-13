@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct SalesItem {
+public struct SalesItem {
   var id: String
   var itemId: String
   var name: String
@@ -55,7 +55,7 @@ extension SalesItem: Decodable {
      case customFields = "CustomFields"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
   
     id = try values.decode(String.self, forKey: .id)
@@ -86,7 +86,7 @@ extension SalesItem: Hashable {
 }
 
 extension SalesItem: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     try self.init(id: xml.attr("Id"),
                   itemId: xml.attr("ItemId"),
                   name: xml.attr("Name"),

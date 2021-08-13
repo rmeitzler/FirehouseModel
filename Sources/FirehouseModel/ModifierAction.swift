@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct ModifierAction {
+public struct ModifierAction {
   var modifierActionGroupId: String
   var modifierAction: String
   var action: String
@@ -27,7 +27,7 @@ extension ModifierAction: Decodable {
     case displayShortName = "DisplayShortName"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     
     modifierActionGroupId = try values.decode(String.self, forKey: .modifierActionGroupId)
@@ -43,7 +43,7 @@ extension ModifierAction: Hashable {
 }
 
 extension ModifierAction: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     try self.init(modifierActionGroupId: xml.attr("ModifierActionGroupId"),
                   modifierAction: xml.attr("ModifierAction"),
                   action: xml.attr("Action"),

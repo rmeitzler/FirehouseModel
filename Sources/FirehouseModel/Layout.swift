@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct Layout {
+public struct Layout {
   var menuItems: [MenuItem]
   var menuItemInclusion: MenuItemInclusion?
   var salesItems: [SalesItem]
@@ -49,7 +49,7 @@ extension Layout: Hashable {
 }
 
 extension Layout: Decodable {
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
       let values = try decoder.container(keyedBy: CodingKeys.self)
     
       menuItems = try values.decode([MenuItem].self, forKey: .menuItems)
@@ -71,7 +71,7 @@ extension Layout: Decodable {
 }
 
 extension Layout: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     
     guard let menuItems: [MenuItem] = try xml.child(named: "MenuItems")?.children.decodeAll() else {
       throw XMLTreeError.couldNotDecodeClass(String(describing: [MenuItem].self))

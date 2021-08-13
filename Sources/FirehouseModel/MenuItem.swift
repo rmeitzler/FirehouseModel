@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct MenuItem {
+public struct MenuItem {
   var id: String
   var name: String
   var displayName: String
@@ -65,7 +65,7 @@ extension MenuItem: Hashable {
 }
 
 extension MenuItem: Decodable {
-    init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         //let additionalInfo = try values.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
       
@@ -96,7 +96,7 @@ extension MenuItem: Decodable {
 }
 
 extension MenuItem: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
 
     guard let salesItemIds: [String] = xml.child(named: "SalesItems")?.valuesOfChildren() else {
       throw XMLTreeError.problemDecodingNode("MenuItem > SalesItems")

@@ -8,7 +8,7 @@
 import SwiftUI
 import XMLTree
 
-struct PizzaConfig {
+public struct PizzaConfig {
   var pizzaCategory: String
   var portionPricingMethod: String
   var portionPricingPercent: String
@@ -38,6 +38,22 @@ extension PizzaConfig: Decodable {
     case section4Id = "Section4Id"
     case section4Type = "Section4Type"
   }
+  
+  public init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    
+    self.init(pizzaCategory: try values.decode(String.self, forKey: .pizzaCategory),
+              portionPricingMethod: try values.decode(String.self, forKey: .portionPricingMethod),
+              portionPricingPercent: try values.decode(String.self, forKey: .portionPricingPercent),
+              section1Id: try values.decode(String.self, forKey: .section1Id),
+              section1Type: try values.decode(String.self, forKey: .section1Type),
+              section2Id: try values.decode(String.self, forKey: .section2Id),
+              section2Type: try values.decode(String.self, forKey: .section2Type),
+              section3Id: try values.decode(String.self, forKey: .section3Id),
+              section3Type: try values.decode(String.self, forKey: .section3Type),
+              section4Id: try values.decode(String.self, forKey: .section4Id),
+              section4Type: try values.decode(String.self, forKey: .section4Type))
+  }
 }
 
 extension PizzaConfig: Hashable {
@@ -45,7 +61,7 @@ extension PizzaConfig: Hashable {
 }
 
 extension PizzaConfig: XMLTreeDecodable {
-  init(from xml: XMLTree) throws {
+  public init(from xml: XMLTree) throws {
     
     try self.init(pizzaCategory: xml.attr("PizzaCategory"),
                   portionPricingMethod: xml.attr("PortionPricingMethod"),

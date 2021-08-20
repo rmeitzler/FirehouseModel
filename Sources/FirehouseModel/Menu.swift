@@ -56,21 +56,6 @@ extension Menu: Hashable {
   
 }
 
-extension Menu {
-  public mutating func updateSubmenus(_ newSubmenus: [Submenu]) {
-    self.submenus = newSubmenus
-  }
-  
-//  public var fullSubmenus: [Submenu] {
-//    var allSubmenuIds: [String] = []
-//
-//    for sub in self.submenus {
-//      allSubmenuIds.append(sub.id)
-//    }
-//    return submenus.filter({allSubmenuIds.contains($0.id)})
-//  }
-}
-
 extension Menu: XMLTreeDecodable {
   public init(from xml: XMLTree) throws {
     guard let submenuIds: [SubmenuInfo] = try xml.child(named: "SubMenus")?.children.decodeAll() else {

@@ -22,6 +22,8 @@ public struct Submenu {
   
   public var restrictions: [Restriction]?
   public var customFields: String?
+  
+  public var menuItems: [MenuItem]
 }
 
 extension Submenu: Decodable {
@@ -34,7 +36,7 @@ extension Submenu: Decodable {
     case sourceSubMenuId = "SourceSubMenuId"
     case isShowHeader = "IsShowHeader"
     case supportedOrderModes = "SupportedOrderModes"
-    case menuItems = "MenuItems"
+    case menuItemIds = "MenuItems"
     case restrictions = "Restrictions"
     case customFields = "CustomFields"
   }
@@ -50,9 +52,10 @@ extension Submenu: Decodable {
     sourceSubMenuId = try values.decode(String.self, forKey: .sourceSubMenuId)
     isShowHeader = try values.decode(String.self, forKey: .isShowHeader)
     supportedOrderModes = try values.decode(String.self, forKey: .supportedOrderModes)
-    menuItemIds = try values.decodeIfPresent([String].self, forKey: .menuItems)
+    menuItemIds = try values.decodeIfPresent([String].self, forKey: .menuItemIds)
     restrictions = try values.decodeIfPresent([Restriction].self, forKey: .restrictions)
     customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
+    menuItems = []
   }
 }
 
@@ -76,6 +79,7 @@ extension Submenu: XMLTreeDecodable {
                   supportedOrderModes: xml.attr("SupportedOrderModes"),
                   menuItemIds: itemIds,
                   restrictions: restrictions,
-                  customFields: xml.attrIfPresent("CustomFields"))
+                  customFields: xml.attrIfPresent("CustomFields"),
+                  menuItems: [])
   }
 }

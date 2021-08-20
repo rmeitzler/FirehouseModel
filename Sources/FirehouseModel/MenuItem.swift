@@ -33,6 +33,8 @@ public struct MenuItem {
   public var restrictions: [Restriction]?
   public var customFields: String?
   
+  public var saleItems: [SalesItem]
+  
   enum CodingKeys: String, CodingKey {
     case id = "Id"
     case name = "Name"
@@ -92,6 +94,7 @@ extension MenuItem: Decodable {
       salesGroups = try values.decodeIfPresent(String.self, forKey: .salesGroups)
       restrictions = try values.decodeIfPresent([Restriction].self, forKey: .restrictions)
       customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
+      saleItems = []
     }
 }
 
@@ -127,6 +130,7 @@ extension MenuItem: XMLTreeDecodable {
                   salesItemIds: salesItemIds,
                   salesGroups: xml.attrIfPresent("SalesGroup"),
                   restrictions: restrictions,
-                  customFields: xml.attrIfPresent("CustomFields"))
+                  customFields: xml.attrIfPresent("CustomFields"),
+                  saleItems: [])
   }
 }

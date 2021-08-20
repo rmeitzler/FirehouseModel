@@ -18,7 +18,9 @@ public struct Menu {
   public var supportedOrderModes: String
   public var menuAttributes: String
   
-  public var submenus: [SubmenuInfo]
+  public var submenuIds: [SubmenuInfo]
+  
+  public var submenus: [Submenu]
 }
 
 extension Menu: Decodable {
@@ -31,7 +33,7 @@ extension Menu: Decodable {
     case externalId = "ExternalId"
     case supportedOrderModes = "SupportedOrderModes"
     case menuAttributes = "MenuAttributes"
-    case submenus = "SubMenus"
+    case submenuIds = "SubMenus"
   }
   
   public init(from decoder: Decoder) throws {
@@ -45,7 +47,8 @@ extension Menu: Decodable {
     externalId = try values.decode(String.self, forKey: .externalId)
     supportedOrderModes = try values.decode(String.self, forKey: .supportedOrderModes)
     menuAttributes = try values.decode(String.self, forKey: .menuAttributes)
-    submenus = try values.decode([SubmenuInfo].self, forKey: .id)
+    submenuIds = try values.decode([SubmenuInfo].self, forKey: .submenuIds)
+    submenus = []
   }
 }
 
@@ -53,9 +56,20 @@ extension Menu: Hashable {
   
 }
 
+//extension Menu {
+//  public var fullSubmenus: [Submenu] {
+//    var allSubmenuIds: [String] = []
+//
+//    for sub in self.submenus {
+//      allSubmenuIds.append(sub.id)
+//    }
+//    return submenus.filter({allSubmenuIds.contains($0.id)})
+//  }
+//}
+
 extension Menu: XMLTreeDecodable {
   public init(from xml: XMLTree) throws {
-    guard let submenus: [SubmenuInfo] = try xml.child(named: "SubMenus")?.children.decodeAll() else {
+    guard let submenuIds: [SubmenuInfo] = try xml.child(named: "SubMenus")?.children.decodeAll() else {
       throw XMLTreeError.couldNotDecodeClass(String(describing: [SubmenuInfo].self))
     }
     
@@ -67,7 +81,8 @@ extension Menu: XMLTreeDecodable {
                   externalId: xml.attr("ExternalId"),
                   supportedOrderModes: xml.attr("SupportedOrderModes"),
                   menuAttributes: xml.attr("MenuAttributes"),
-                  submenus: submenus
+                  submenuIds: submenuIds,
+                  submenus: []
     )
   }
 }

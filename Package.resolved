@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "XMLTree",
+        "repositoryURL": "https://github.com/rmeitzler/XMLTree",
+        "state": {
+          "branch": null,
+          "revision": "38c41badc6ceacbf3ac6e44b48c7d990df2cc712",
+          "version": "1.1.5"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

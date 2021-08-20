@@ -24,6 +24,10 @@ public struct Submenu {
   public var customFields: String?
   
   public var menuItems: [MenuItem]
+  
+  public var sublet: (id: String, name: String) {
+    return (id: id, name: name)
+  }
 }
 
 extension Submenu: Decodable {

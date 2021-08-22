@@ -87,3 +87,9 @@ extension Submenu: XMLTreeDecodable {
                   menuItems: [])
   }
 }
+
+extension Submenu {
+  public var availableMenuItems: [MenuItem] {
+    return menuItems.filter({$0.isVisible.lowercased() == "true"})
+  }
+}

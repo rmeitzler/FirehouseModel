@@ -16,6 +16,8 @@ public struct Option {
   public var modifierAction: String
   public var weight: String
   public var customFields: String?
+  
+  public var salesItemOption: SalesItemOption?
 }
 
 extension Option: Decodable {
@@ -39,6 +41,7 @@ extension Option: Decodable {
     modifierAction = try values.decode(String.self, forKey: .modifierAction)
     weight = try values.decode(String.self, forKey: .weight)
     customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
+    salesItemOption = nil
   }
 }
 
@@ -55,6 +58,7 @@ extension Option: XMLTreeDecodable {
               price: xml.attr("Price"),
               modifierAction: xml.attr("ModifierAction"),
               weight: xml.attr("Weight"),
-              customFields: xml.attrIfPresent("CustomFields"))
+              customFields: xml.attrIfPresent("CustomFields"),
+              salesItemOption: nil)
   }
 }

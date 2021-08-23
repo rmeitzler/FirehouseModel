@@ -178,4 +178,19 @@ extension MenuItem {
     return MenuItem.sandwichIds.contains(id)
   }
   
+  func defaultSalesItem() -> SalesItem? {
+    var matches: [SalesItem] = []
+    for itm in availableSalesItems() {
+      if itm.name.lowercased().contains(breadType.rawValue) && itm.name.lowercased().contains(size.rawValue) {
+        matches.append(itm)
+      }
+    }
+    
+    if let match = matches.first {
+      print("default_match:\(match.name)")
+      return match
+    }
+    return nil
+  }
+  
 }

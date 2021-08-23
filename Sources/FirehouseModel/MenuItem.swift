@@ -181,7 +181,11 @@ extension MenuItem {
   public func defaultSalesItem() -> SalesItem? {
     var matches: [SalesItem] = []
     for itm in availableSalesItems() {
-      if itm.name.lowercased().contains(breadType.rawValue) && itm.name.lowercased().contains(size.rawValue) {
+      if isSandwich() {
+        if itm.name.lowercased().contains(breadType.rawValue) && itm.name.lowercased().contains(size.rawValue) {
+          matches.append(itm)
+        }
+      } else if itm.id == defaultItemId {
         matches.append(itm)
       }
     }

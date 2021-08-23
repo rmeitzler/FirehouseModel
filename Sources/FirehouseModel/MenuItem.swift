@@ -178,7 +178,7 @@ extension MenuItem {
     return MenuItem.sandwichIds.contains(id)
   }
   
-  func defaultSalesItem() -> SalesItem? {
+  public func defaultSalesItem() -> SalesItem? {
     var matches: [SalesItem] = []
     for itm in availableSalesItems() {
       if itm.name.lowercased().contains(breadType.rawValue) && itm.name.lowercased().contains(size.rawValue) {

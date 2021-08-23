@@ -9,13 +9,13 @@ import SwiftUI
 import XMLTree
 
 public struct MenuItem {
-  public enum BreadType {
+  public enum BreadType: String {
     case white
     case wheat
     case none
   }
   
-  public enum MenuItemSize {
+  public enum MenuItemSize: String {
     case small
     case medium
     case large

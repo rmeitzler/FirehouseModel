@@ -53,3 +53,9 @@ extension OptionSet {
     return groups?.map({$0.id})
   }
 }
+
+extension OptionSet {
+  public func availableOptionGroups() -> [OptionGroup]? {
+    return optionGroups?.filter({$0.isVisible.lowercased() == "true"})
+  }
+}

@@ -9,6 +9,24 @@ import SwiftUI
 import XMLTree
 
 public struct MenuItem {
+  public enum BreadType {
+    case white
+    case wheat
+    case none
+  }
+  
+  public enum MenuItemSize {
+    case small
+    case medium
+    case large
+    case kids
+    case cup
+    case bowl
+    case none
+  }
+  
+  public static var sandwichIds = ["30000","30004","30008","30012","30016","30020","30024","30032","30040","30045","30047","30048","30052","30054","30062","30070","30076","30080","30081","30082","30083","30088","30129","30133","30157","30202","30207","30208","30210","30211","30262","30263","30264","30265","30266","30267","30268","30269","30283","30327","30328","30329","30332","30341","30342","30343","30344","30346","30347","30352","30353","30354","30355","30357"]
+  
   public var id: String
   public var name: String
   public var displayName: String
@@ -34,6 +52,8 @@ public struct MenuItem {
   public var customFields: String?
   
   public var saleItems: [SalesItem]
+  public var breadType: BreadType
+  public var size: MenuItemSize
   
   enum CodingKeys: String, CodingKey {
     case id = "Id"
@@ -95,6 +115,10 @@ extension MenuItem: Decodable {
       restrictions = try values.decodeIfPresent([Restriction].self, forKey: .restrictions)
       customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
       saleItems = []
+    
+      let isSandwich = MenuItem.isSandwich(id)
+      breadType = isSandwich ? .white : .none
+      size = isSandwich ? .medium : .none
     }
 }
 
@@ -106,6 +130,8 @@ extension MenuItem: XMLTreeDecodable {
     }
     
     let restrictions: [Restriction]? = try? xml.child(named: "Restrictions")?.children.decodeAll()
+    
+    let isSandwich = MenuItem.isSandwich(try xml.attr("Id"))
     
     //CodingKeys.promoId.stringValue
     try self.init(id: xml.attr("Id"),
@@ -131,7 +157,10 @@ extension MenuItem: XMLTreeDecodable {
                   salesGroups: xml.attrIfPresent("SalesGroup"),
                   restrictions: restrictions,
                   customFields: xml.attrIfPresent("CustomFields"),
-                  saleItems: [])
+                  saleItems: [],
+                  breadType: isSandwich ? .white : .none,
+                  size: isSandwich ? .medium : .none
+    )
   }
 }
 
@@ -141,5 +170,12 @@ extension MenuItem {
     return saleItems.filter({$0.isVisible.lowercased() == "true"})
   }
   
+  public static func isSandwich(_ itemId: String) -> Bool {
+    return MenuItem.sandwichIds.contains(itemId)
+  }
+  
+  public func isSandwich() -> Bool {
+    return MenuItem.sandwichIds.contains(id)
+  }
   
 }

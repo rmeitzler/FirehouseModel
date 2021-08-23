@@ -113,3 +113,9 @@ extension SalesItem: XMLTreeDecodable {
                   itemOptionSet: nil)
   }
 }
+
+extension SalesItem {
+  public func availableOptionSet() -> OptionSet? {
+    return itemOptionSet?.isVisible.lowercased() == "true" ? itemOptionSet : nil
+  }
+}

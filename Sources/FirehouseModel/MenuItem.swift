@@ -134,3 +134,12 @@ extension MenuItem: XMLTreeDecodable {
                   saleItems: [])
   }
 }
+
+
+extension MenuItem {
+  public func availableSalesItems() -> [SalesItem] {
+    return saleItems.filter({$0.isVisible.lowercased() == "true"})
+  }
+  
+  
+}

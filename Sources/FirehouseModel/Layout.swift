@@ -157,3 +157,56 @@ extension Layout {
   
   
 }
+
+extension Layout {
+  func postProcessing() -> Self {
+    var mutableData = self
+    
+    for idx in 0..<mutableData.menus.count {
+      // menu.submenus
+      var applicableSubmenuIds: [String] = []
+      var matchingSubmenus: [FirehouseModel.Submenu] = []
+      applicableSubmenuIds = mutableData.menus[idx].submenuIds.map({$0.id})
+      matchingSubmenus = submenus.filter({applicableSubmenuIds.contains($0.id)})
+      
+      for subIdx in 0..<matchingSubmenus.count {
+        let applicableItemIds: [String] = matchingSubmenus[subIdx].menuItemIds ?? []
+        var matchingItems: [FirehouseModel.MenuItem] = menuItems.filter({applicableItemIds.contains($0.id)})
+        
+        for itmIdx in 0..<matchingItems.count {
+          let applicableSalesIds: [String] = matchingItems[itmIdx].salesItemIds
+          var matchingSalesItems: [FirehouseModel.SalesItem] = salesItems.filter({applicableSalesIds.contains($0.id)})
+          
+          for salesItmIdx in 0..<matchingSalesItems.count {
+            let applicableOptionSetId: String = matchingSalesItems[salesItmIdx].itemOptionSetId
+            var matchingOptionSet: FirehouseModel.OptionSet? = optionSets.filter({$0.id == applicableOptionSetId}).first
+            
+            if let groupIDs = matchingOptionSet?.groupIds() {
+              for groupIdIdx in 0..<groupIDs.count {
+                let applicableGroupId: String = groupIDs[groupIdIdx]
+                let possibleMatchingOptionGroup: FirehouseModel.OptionGroup? = optionGroups.filter({applicableGroupId == $0.id}).first
+                
+                if let matchingOptGroup = possibleMatchingOptionGroup, matchingOptGroup.isVisible.lowercased() == "true" {
+                  if matchingOptionSet?.optionGroups == nil {
+                    matchingOptionSet?.optionGroups = []
+                  }
+                  matchingOptionSet?.optionGroups?.append(matchingOptGroup)
+                }
+              }
+            }
+            
+            matchingSalesItems[salesItmIdx].itemOptionSet = matchingOptionSet
+          }
+          
+          matchingItems[itmIdx].saleItems = matchingSalesItems
+        }
+        
+        matchingSubmenus[subIdx].menuItems = matchingItems
+      }
+      
+      mutableData.menus[idx].submenus = matchingSubmenus
+    }
+    
+    return mutableData
+  }
+}

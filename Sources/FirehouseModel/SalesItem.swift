@@ -119,3 +119,7 @@ extension SalesItem {
     return itemOptionSet?.isVisible.lowercased() == "true" ? itemOptionSet : nil
   }
 }
+
+extension SalesItem {
+  
+}

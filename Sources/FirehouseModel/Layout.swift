@@ -159,7 +159,7 @@ extension Layout {
 }
 
 extension Layout {
-  func postProcessing() -> Self {
+  public func postProcessing() -> Self {
     var mutableData = self
     
     for idx in 0..<mutableData.menus.count {

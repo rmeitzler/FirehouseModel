@@ -142,7 +142,13 @@ extension Layout: XMLTreeDecodable {
 }
 
 extension Layout {
+  
+  public func menuItem(by id: String) -> MenuItem? {
+    return menuItems.filter({$0.id == id}).first
+  }
+  
   public func salesItemOption(by id: String) -> SalesItemOption? {
     return salesItemOptions.filter({$0.id == id}).first
   }
+  
 }

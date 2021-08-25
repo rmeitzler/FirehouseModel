@@ -9,20 +9,16 @@ import SwiftUI
 import XMLTree
 import Combine
 
-class ModelManager: ObservableObject {
-  @StateObject var xmlManager: XMLManager
+public class ModelManager: ObservableObject {
+  @Published private var xmlManager: XMLManager = XMLManager()
+  private var subscriber: AnyCancellable?
+  @Published private(set) var model: Layout?
+  @Published private(set) var xmlModel: [XMLTree]?
   
-  //@Published private(set) var model: Layout
-  
-  init() {
-    let mgr = XMLManager()
-    _xmlManager = StateObject(wrappedValue: mgr)
+  public init() {
     xmlManager.loadXml(filename: "WebLayout")
-    
-//    let xmlSubscriber = XMLTreeSubscriber()
-//    xmlManager.treeData!.publisher().subscribe(xmlSubscriber)
-    
-    _ = xmlManager.$treeData.sink { completion in
+
+    subscriber = xmlManager.$treeData.sink { completion in
       switch completion {
               case .finished:
                   print("finished")
@@ -30,28 +26,20 @@ class ModelManager: ObservableObject {
                   print(never)
           }
     } receiveValue: { value in
-      print("value::\(String(describing: value))")
+      if let val = value {
+          do {
+            self.xmlModel = [val]
+              let decoded: Layout = try val.decode()
+              print("decoded:\(decoded.menus.count) menus")
+            self.model = decoded
+            
+            self.subscriber = nil
+          } catch {
+              print("layout failed")
+          }
+      }
     }
 
     
   }
-}
-
-
-class XMLTreeSubscriber: Subscriber {
-    typealias Input = String
-    typealias Failure = Never
-    
-    func receive(subscription: Subscription) {
-        subscription.request(.unlimited)
-    }
-    
-    func receive(_ input: String) -> Subscribers.Demand {
-        print("Received: \(input)")
-        return .none
-    }
-    
-    func receive(completion: Subscribers.Completion<Never>) {
-        print("Completion event:", completion)
-    }
 }

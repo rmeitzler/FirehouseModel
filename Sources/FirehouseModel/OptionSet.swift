@@ -31,7 +31,7 @@ extension OptionSet: Decodable {
     id = try values.decode(String.self, forKey: .id)
     name = try values.decode(String.self, forKey: .name)
     isVisible = try values.decode(String.self, forKey: .isVisible)
-    groups = try values.decode([Group].self, forKey: .isVisible)
+    groups = try values.decode([Group].self, forKey: .groupIds)
     optionGroups = nil
   }
 }

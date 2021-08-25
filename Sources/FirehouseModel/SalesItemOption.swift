@@ -73,3 +73,5 @@ extension SalesItemOption: XMLTreeDecodable {
                   customFields: xml.attrIfPresent("CustomFields"))
   }
 }
+
+extension SalesItemOption: Hideable {}

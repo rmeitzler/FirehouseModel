@@ -83,4 +83,17 @@ extension ModelManager {
   public func salesItemOption(for optionId: String) -> SalesItemOption? {
     return model?.salesItemOptions.filter({$0.id == optionId}).first
   }
+  
+//  public func visible(_ submenus: [Submenu]?) -> [Submenu]? {
+//    return submenus?.filter({$0.isVisible.lowercased() == "true"})
+//  }
+  
+  public func visible<T: Hideable>(_ submenus: [T]?) -> [T]? {
+    return submenus?.filter({$0.isVisible.lowercased() == "true"})
+  }
+  
+}
+
+public protocol Hideable {
+  var isVisible: String { get }
 }

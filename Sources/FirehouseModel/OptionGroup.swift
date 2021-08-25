@@ -108,3 +108,5 @@ extension OptionGroup: XMLTreeDecodable {
                   customFields: xml.attrIfPresent("CustomFields"))
   }
 }
+
+extension OptionGroup: Hideable {}

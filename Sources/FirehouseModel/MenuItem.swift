@@ -198,3 +198,5 @@ extension MenuItem {
 //  }
   
 }
+
+extension MenuItem: Hideable {}

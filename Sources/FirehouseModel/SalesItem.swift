@@ -121,3 +121,4 @@ extension SalesItem: XMLTreeDecodable {
 //  }
 //}
 
+extension SalesItem: Hideable {}

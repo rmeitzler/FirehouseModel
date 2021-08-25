@@ -59,3 +59,5 @@ extension OptionSet {
 //    return optionGroups?.filter({$0.isVisible.lowercased() == "true"})
 //  }
 //}
+
+extension OptionSet: Hideable {}

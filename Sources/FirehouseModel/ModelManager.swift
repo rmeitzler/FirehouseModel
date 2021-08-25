@@ -92,6 +92,32 @@ extension ModelManager {
     return submenus?.filter({$0.isVisible.lowercased() == "true"})
   }
   
+  public func defaultSalesItem(for menuItemId: String) -> SalesItem? {
+    var matches: [SalesItem] = []
+    guard let menuItm = model?.menuItem(by: menuItemId) else {
+      return nil
+    }
+    guard let availableSalesItems = visible(salesItems(for: menuItemId)) else {
+      return nil
+    }
+    
+      for itm in availableSalesItems {
+        if menuItm.isSandwich() {
+          if itm.name.lowercased().contains(menuItm.breadType.rawValue) && itm.name.lowercased().contains(menuItm.size.rawValue) {
+            matches.append(itm)
+          }
+        } else if itm.id == menuItm.defaultItemId {
+          matches.append(itm)
+        }
+      }
+  
+      if let match = matches.first {
+        print("default_match:\(match.name)")
+        return match
+      }
+      return nil
+    }
+  
 }
 
 public protocol Hideable {

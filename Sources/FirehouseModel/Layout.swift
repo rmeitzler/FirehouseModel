@@ -156,24 +156,24 @@ extension Layout {
   }
 }
 
-extension Layout {
-  public enum Result {
-    case menuItem(Array<MenuItem>)
-    case salesItem(Array<SalesItem>)
-    case empty(Array<Any>)
-  }
-  
-  public func get<T>(by id: String, elm: T? = nil) -> Result {
-    switch T.self {
-    case is MenuItem.Type:
-      return .menuItem( menuItems.filter({$0.id == id}) )
-    case is SalesItem.Type:
-      return .salesItem( salesItems.filter({$0.id == id}) )
-    default:
-      return .empty([])
-    }
-  }
-}
+//extension Layout {
+//  public enum Result {
+//    case menuItem(Array<MenuItem>)
+//    case salesItem(Array<SalesItem>)
+//    case empty(Array<Any>)
+//  }
+//
+//  public func get<T>(by id: String, elm: T? = nil) -> Result {
+//    switch T.self {
+//    case is MenuItem.Type:
+//      return .menuItem( menuItems.filter({$0.id == id}) )
+//    case is SalesItem.Type:
+//      return .salesItem( salesItems.filter({$0.id == id}) )
+//    default:
+//      return .empty([])
+//    }
+//  }
+//}
 
 extension Layout {
   public func postProcessing() -> Self {

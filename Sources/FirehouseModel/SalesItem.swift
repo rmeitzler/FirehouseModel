@@ -120,6 +120,3 @@ extension SalesItem {
   }
 }
 
-extension SalesItem {
-  
-}

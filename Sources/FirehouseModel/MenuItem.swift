@@ -27,6 +27,8 @@ public struct MenuItem {
   
   public static var sandwichIds = ["30000","30004","30008","30012","30016","30020","30024","30032","30040","30045","30047","30048","30052","30054","30062","30070","30076","30080","30081","30082","30083","30088","30129","30133","30157","30202","30207","30208","30210","30211","30262","30263","30264","30265","30266","30267","30268","30269","30283","30327","30328","30329","30332","30341","30342","30343","30344","30346","30347","30352","30353","30354","30355","30357"]
   
+  public static var kidsIds = ["30207","30208","30210","30211","30352","30353","30354","30355"]
+  
   public var id: String
   public var name: String
   public var displayName: String
@@ -117,8 +119,10 @@ extension MenuItem: Decodable {
       //saleItems = []
     
       let isSandwich = MenuItem.isSandwich(id)
+      let isKids = MenuItem.isKids(id)
       breadType = isSandwich ? .white : .none
       size = isSandwich ? .medium : .none
+      size = isKids ? .kids : size
     }
 }
 
@@ -132,6 +136,7 @@ extension MenuItem: XMLTreeDecodable {
     let restrictions: [Restriction]? = try? xml.child(named: "Restrictions")?.children.decodeAll()
     
     let isSandwich = MenuItem.isSandwich(try xml.attr("Id"))
+    let isKids = MenuItem.isKids(try xml.attr("Id"))
     
     //CodingKeys.promoId.stringValue
     try self.init(id: xml.attr("Id"),
@@ -159,7 +164,8 @@ extension MenuItem: XMLTreeDecodable {
                   customFields: xml.attrIfPresent("CustomFields"),
                   //saleItems: [],
                   breadType: isSandwich ? .white : .none,
-                  size: isSandwich ? .medium : .none
+                  size: isKids ? .kids : (isSandwich ? .medium : .none)
+                  
     )
   }
 }
@@ -169,6 +175,14 @@ extension MenuItem {
 //  public func availableSalesItems() -> [SalesItem] {
 //    return saleItems.filter({$0.isVisible.lowercased() == "true"})
 //  }
+  
+  public static func isKids(_ itemId: String) -> Bool {
+    return MenuItem.kidsIds.contains(itemId)
+  }
+  
+  public func isKids() -> Bool {
+    return MenuItem.kidsIds.contains(id)
+  }
   
   public static func isSandwich(_ itemId: String) -> Bool {
     return MenuItem.sandwichIds.contains(itemId)

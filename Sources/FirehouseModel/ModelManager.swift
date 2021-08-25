@@ -10,17 +10,30 @@ import XMLTree
 import Combine
 
 class ModelManager: ObservableObject {
-  @StateObject var xmlManager
+  @StateObject var xmlManager: XMLManager
   
-  @Published private(set) var model: Layout
+  //@Published private(set) var model: Layout
   
   init() {
-    let mgr = XMLManager
-    _xmlManager: StateObject(wrappedValue: mgr)
+    let mgr = XMLManager()
+    _xmlManager = StateObject(wrappedValue: mgr)
     xmlManager.loadXml(filename: "WebLayout")
     
-    let xmlSubscriber = XMLTreeSubscriber()
-    xmlManager.subscribe(xmlSubscriber)
+//    let xmlSubscriber = XMLTreeSubscriber()
+//    xmlManager.treeData!.publisher().subscribe(xmlSubscriber)
+    
+    _ = xmlManager.$treeData.sink { completion in
+      switch completion {
+              case .finished:
+                  print("finished")
+              case .failure(let never):
+                  print(never)
+          }
+    } receiveValue: { value in
+      print("value::\(String(describing: value))")
+    }
+
+    
   }
 }
 

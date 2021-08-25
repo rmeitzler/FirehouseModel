@@ -12,8 +12,8 @@ import Combine
 public class ModelManager: ObservableObject {
   @Published private var xmlManager: XMLManager = XMLManager()
   private var subscriber: AnyCancellable?
-  @Published private(set) var model: Layout?
-  @Published private(set) var xmlModel: [XMLTree]?
+  @Published public private(set) var model: Layout?
+  @Published public private(set) var xmlModel: [XMLTree]?
   
   public init() {
     xmlManager.loadXml(filename: "WebLayout")

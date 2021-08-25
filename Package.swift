@@ -25,6 +25,7 @@ let package = Package(
             name: "FirehouseModel",
             dependencies: ["XMLTree"],
             sources: [
+              "ModelManager.swift",
               "DefaultOption.swift",
               "Layout.swift",
               "MenuItem.swift",

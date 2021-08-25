@@ -14,7 +14,7 @@ public struct OptionSet {
   public var isVisible: String
   public var groups: [Group]?
   
-  public var optionGroups: [OptionGroup]?
+  //public var optionGroups: [OptionGroup]?
 }
 
 extension OptionSet: Decodable {
@@ -32,7 +32,7 @@ extension OptionSet: Decodable {
     name = try values.decode(String.self, forKey: .name)
     isVisible = try values.decode(String.self, forKey: .isVisible)
     groups = try values.decode([Group].self, forKey: .groupIds)
-    optionGroups = nil
+    //optionGroups = nil
   }
 }
 
@@ -44,7 +44,7 @@ extension OptionSet: XMLTreeDecodable {
   public init(from xml: XMLTree) throws {
     let grps: [Group]? = try xml.child(named: "Groups")?.children.decodeAll()
     
-    try self.init(id: xml.attr("Id"), name: xml.attr("Name"), isVisible: xml.attr("IsVisible"), groups: grps, optionGroups: nil)
+    try self.init(id: xml.attr("Id"), name: xml.attr("Name"), isVisible: xml.attr("IsVisible"), groups: grps)
   }
 }
 
@@ -54,8 +54,8 @@ extension OptionSet {
   }
 }
 
-extension OptionSet {
-  public func availableOptionGroups() -> [OptionGroup]? {
-    return optionGroups?.filter({$0.isVisible.lowercased() == "true"})
-  }
-}
+//extension OptionSet {
+//  public func availableOptionGroups() -> [OptionGroup]? {
+//    return optionGroups?.filter({$0.isVisible.lowercased() == "true"})
+//  }
+//}

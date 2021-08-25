@@ -51,7 +51,7 @@ public struct MenuItem {
   public var restrictions: [Restriction]?
   public var customFields: String?
   
-  public var saleItems: [SalesItem]
+  //public var saleItems: [SalesItem]
   public var breadType: BreadType
   public var size: MenuItemSize
   
@@ -114,7 +114,7 @@ extension MenuItem: Decodable {
       salesGroups = try values.decodeIfPresent(String.self, forKey: .salesGroups)
       restrictions = try values.decodeIfPresent([Restriction].self, forKey: .restrictions)
       customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
-      saleItems = []
+      //saleItems = []
     
       let isSandwich = MenuItem.isSandwich(id)
       breadType = isSandwich ? .white : .none
@@ -157,7 +157,7 @@ extension MenuItem: XMLTreeDecodable {
                   salesGroups: xml.attrIfPresent("SalesGroup"),
                   restrictions: restrictions,
                   customFields: xml.attrIfPresent("CustomFields"),
-                  saleItems: [],
+                  //saleItems: [],
                   breadType: isSandwich ? .white : .none,
                   size: isSandwich ? .medium : .none
     )
@@ -166,9 +166,9 @@ extension MenuItem: XMLTreeDecodable {
 
 
 extension MenuItem {
-  public func availableSalesItems() -> [SalesItem] {
-    return saleItems.filter({$0.isVisible.lowercased() == "true"})
-  }
+//  public func availableSalesItems() -> [SalesItem] {
+//    return saleItems.filter({$0.isVisible.lowercased() == "true"})
+//  }
   
   public static func isSandwich(_ itemId: String) -> Bool {
     return MenuItem.sandwichIds.contains(itemId)
@@ -178,23 +178,23 @@ extension MenuItem {
     return MenuItem.sandwichIds.contains(id)
   }
   
-  public func defaultSalesItem() -> SalesItem? {
-    var matches: [SalesItem] = []
-    for itm in availableSalesItems() {
-      if isSandwich() {
-        if itm.name.lowercased().contains(breadType.rawValue) && itm.name.lowercased().contains(size.rawValue) {
-          matches.append(itm)
-        }
-      } else if itm.id == defaultItemId {
-        matches.append(itm)
-      }
-    }
-    
-    if let match = matches.first {
-      print("default_match:\(match.name)")
-      return match
-    }
-    return nil
-  }
+//  public func defaultSalesItem() -> SalesItem? {
+//    var matches: [SalesItem] = []
+//    for itm in availableSalesItems() {
+//      if isSandwich() {
+//        if itm.name.lowercased().contains(breadType.rawValue) && itm.name.lowercased().contains(size.rawValue) {
+//          matches.append(itm)
+//        }
+//      } else if itm.id == defaultItemId {
+//        matches.append(itm)
+//      }
+//    }
+//
+//    if let match = matches.first {
+//      print("default_match:\(match.name)")
+//      return match
+//    }
+//    return nil
+//  }
   
 }

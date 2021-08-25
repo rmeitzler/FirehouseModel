@@ -20,7 +20,7 @@ public struct Menu {
   
   public var submenuIds: [SubmenuInfo]
   
-  public var submenus: [Submenu]
+  //public var submenus: [Submenu]
 }
 
 extension Menu: Decodable {
@@ -48,7 +48,7 @@ extension Menu: Decodable {
     supportedOrderModes = try values.decode(String.self, forKey: .supportedOrderModes)
     menuAttributes = try values.decode(String.self, forKey: .menuAttributes)
     submenuIds = try values.decode([SubmenuInfo].self, forKey: .submenuIds)
-    submenus = []
+    //submenus = []
   }
 }
 
@@ -70,14 +70,14 @@ extension Menu: XMLTreeDecodable {
                   externalId: xml.attr("ExternalId"),
                   supportedOrderModes: xml.attr("SupportedOrderModes"),
                   menuAttributes: xml.attr("MenuAttributes"),
-                  submenuIds: submenuIds,
-                  submenus: []
+                  submenuIds: submenuIds
+                  //submenus: []
     )
   }
 }
 
-extension Menu {
-  public var availableSubmenus: [Submenu] {
-    return submenus.filter({$0.isVisible.lowercased() == "true"})
-  }
-}
+//extension Menu {
+//  public var availableSubmenus: [Submenu] {
+//    return submenus.filter({$0.isVisible.lowercased() == "true"})
+//  }
+//}

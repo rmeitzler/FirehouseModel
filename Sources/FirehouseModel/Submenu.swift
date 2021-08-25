@@ -23,11 +23,11 @@ public struct Submenu {
   public var restrictions: [Restriction]?
   public var customFields: String?
   
-  public var menuItems: [MenuItem]
+  //public var menuItems: [MenuItem]
   
-  public var sublet: (id: String, name: String) {
-    return (id: id, name: name)
-  }
+//  public var sublet: (id: String, name: String) {
+//    return (id: id, name: name)
+//  }
 }
 
 extension Submenu: Decodable {
@@ -59,7 +59,7 @@ extension Submenu: Decodable {
     menuItemIds = try values.decodeIfPresent([String].self, forKey: .menuItemIds)
     restrictions = try values.decodeIfPresent([Restriction].self, forKey: .restrictions)
     customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
-    menuItems = []
+    //menuItems = []
   }
 }
 
@@ -83,13 +83,14 @@ extension Submenu: XMLTreeDecodable {
                   supportedOrderModes: xml.attr("SupportedOrderModes"),
                   menuItemIds: itemIds,
                   restrictions: restrictions,
-                  customFields: xml.attrIfPresent("CustomFields"),
-                  menuItems: [])
+                  customFields: xml.attrIfPresent("CustomFields")
+                 // menuItems: []
+    )
   }
 }
 
-extension Submenu {
-  public var availableMenuItems: [MenuItem] {
-    return menuItems.filter({$0.isVisible.lowercased() == "true"})
-  }
-}
+//extension Submenu {
+//  public var availableMenuItems: [MenuItem] {
+//    return menuItems.filter({$0.isVisible.lowercased() == "true"})
+//  }
+//}

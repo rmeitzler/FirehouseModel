@@ -30,7 +30,7 @@ public struct SalesItem {
   public var caloricValue: String?
   public var customFields: String?
   
-  public var itemOptionSet: OptionSet?
+  //public var itemOptionSet: OptionSet?
 }
 
 extension SalesItem: Decodable {
@@ -80,7 +80,7 @@ extension SalesItem: Decodable {
     freeModifierCount = try values.decode(String.self, forKey: .freeModifierCount)
     caloricValue = try values.decodeIfPresent(String.self, forKey: .caloricValue)
     customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
-    itemOptionSet = nil
+    //itemOptionSet = nil
   }
 }
 
@@ -109,14 +109,15 @@ extension SalesItem: XMLTreeDecodable {
                   discountPrice: xml.attr("DiscountPrice"),
                   freeModifierCount: xml.attr("FreeModifierCount"),
                   caloricValue: xml.attrIfPresent("CaloricValue"),
-                  customFields: xml.attrIfPresent("CustomFields"),
-                  itemOptionSet: nil)
+                  customFields: xml.attrIfPresent("CustomFields")
+                  //itemOptionSet: nil
+    )
   }
 }
 
-extension SalesItem {
-  public func availableOptionSet() -> OptionSet? {
-    return itemOptionSet?.isVisible.lowercased() == "true" ? itemOptionSet : nil
-  }
-}
+//extension SalesItem {
+//  public func availableOptionSet() -> OptionSet? {
+//    return itemOptionSet?.isVisible.lowercased() == "true" ? itemOptionSet : nil
+//  }
+//}
 

@@ -58,7 +58,7 @@ extension ModelManager {
   
   public func salesItems(for menuItemId: String) -> [SalesItem]? {
     let salesItemIds = model?.menuItems.filter({$0.id == menuItemId}).first?.salesItemIds.map({$0})
-    return model?.salesItems.filter({ salesItemIds?.contains($0.itemId) ?? false })
+    return model?.salesItems.filter({ salesItemIds?.contains($0.id) ?? false })
   }
   
   public func optionSet(for salesItemId: String) -> OptionSet? {

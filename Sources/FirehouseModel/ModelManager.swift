@@ -111,6 +111,10 @@ extension ModelManager {
           matches.append(itm)
         }
       }
+    
+      if availableSalesItems.count > 0 && matches.count == 0 {
+        matches.append(availableSalesItems[0])
+      }
   
       if let match = matches.first {
         print("default_match:\(match.name)")

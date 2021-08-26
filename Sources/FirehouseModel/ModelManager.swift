@@ -15,8 +15,8 @@ public class ModelManager: ObservableObject {
   @Published public private(set) var model: Layout?
   @Published public private(set) var xmlModel: [XMLTree]?
   
-  public init() {
-    xmlManager.loadXml(filename: "WebLayout")
+  public init(filename: String = "WebLayout") {
+    xmlManager.loadXml(filename: filename)
 
     subscriber = xmlManager.$treeData.sink { completion in
       switch completion {

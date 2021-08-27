@@ -35,8 +35,17 @@ public class ModelManager: ObservableObject {
             self.model = decoded
             
             self.subscriber = nil
-          } catch {
-              print("layout failed")
+          } catch let XMLTreeError.attributeNotFound(failedKey) {
+            print("Could not find attribute: \(failedKey)")
+          }
+          catch let XMLTreeError.couldNotDecodeClass(className) {
+            print("Could not decode \(className)")
+          }
+          catch let XMLTreeError.problemDecodingNode(node) {
+            print("\(node) broke everything")
+          }
+          catch {
+            print("Some other reason")
           }
       }
     }

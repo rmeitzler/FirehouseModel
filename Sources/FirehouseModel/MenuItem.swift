@@ -48,7 +48,7 @@ public struct MenuItem {
   public var price: String
   public var caloricServingUnit: String?
   public var supportedOrderModes: String
-  public var salesItemIds: [String]
+  public var salesItemIds: [String]?
   public var salesGroups: String?
   public var restrictions: [Restriction]?
   public var customFields: String?
@@ -112,7 +112,7 @@ extension MenuItem: Decodable {
       price = try values.decode(String.self, forKey: .price)
       caloricServingUnit = try values.decodeIfPresent(String.self, forKey: .caloricServingUnit)
       supportedOrderModes = try values.decode(String.self, forKey: .supportedOrderModes)
-      salesItemIds = try values.decode([String].self, forKey: .salesItemIds)
+      salesItemIds = try values.decodeIfPresent([String].self, forKey: .salesItemIds)
       salesGroups = try values.decodeIfPresent(String.self, forKey: .salesGroups)
       restrictions = try values.decodeIfPresent([Restriction].self, forKey: .restrictions)
       customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
@@ -129,7 +129,7 @@ extension MenuItem: Decodable {
 extension MenuItem: XMLTreeDecodable {
   public init(from xml: XMLTree) throws {
 
-    guard let salesItemIds: [String] = xml.child(named: "SalesItems")?.valuesOfChildren() else {
+    guard let salesItemIds: [String]? = xml.child(named: "SalesItems")?.valuesOfChildren() else {
       throw XMLTreeError.problemDecodingNode("MenuItem > SalesItems")
     }
     

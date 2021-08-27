@@ -16,8 +16,9 @@ public class ModelManager: ObservableObject {
   @Published public private(set) var xmlModel: [XMLTree]?
   
   public init(filename: String = "WebLayout") {
+    print("--loading: \(filename)--")
     xmlManager.loadXml(filename: filename)
-
+    
     subscriber = xmlManager.$treeData.sink { completion in
       switch completion {
           case .finished:

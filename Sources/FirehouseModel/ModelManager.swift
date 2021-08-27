@@ -78,7 +78,7 @@ extension ModelManager {
   
   public func salesItemOptions(for optionGroupId: String) -> [SalesItemOption]? {
     let optionGroup: OptionGroup? = model?.optionGroups.filter({$0.id == optionGroupId}).first
-    let optionIds: [String]? = optionGroup?.options.map({$0.id})
+    let optionIds: [String]? = optionGroup?.options?.map({$0.id})
     return optionIds?.compactMap({ salesItemOption(for: $0) })
   }
   

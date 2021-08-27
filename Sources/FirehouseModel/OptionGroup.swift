@@ -26,7 +26,7 @@ public struct OptionGroup {
   public var freeModifiers: String
   public var hideModifier: String
   
-  public var options: [Option]
+  public var options: [Option]?
   
   public var customFields: String?
 }
@@ -72,7 +72,7 @@ extension OptionGroup: Decodable {
     itemOrderingMode = try values.decode(String.self, forKey: .itemOrderingMode)
     freeModifiers = try values.decode(String.self, forKey: .freeModifiers)
     hideModifier = try values.decode(String.self, forKey: .hideModifier)
-    options = try values.decode([Option].self, forKey: .options)
+    options = try values.decodeIfPresent([Option].self, forKey: .options)
     customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
   }
 }
@@ -84,7 +84,7 @@ extension OptionGroup: Hashable {
 extension OptionGroup: XMLTreeDecodable {
   public init(from xml: XMLTree) throws {
     
-    guard let options: [Option] = try xml.child(named: "Options")?.children.decodeAll() else {
+    guard let options: [Option]? = try xml.child(named: "Options")?.children.decodeAll() else {
       throw XMLTreeError.couldNotDecodeClass(String(describing: [Option].self))
     }
     

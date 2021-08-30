@@ -70,6 +70,8 @@ extension Submenu: Hashable {
 extension Submenu: XMLTreeDecodable {
   public init(from xml: XMLTree) throws {
     
+    
+    
     let itemIds: [String]? = xml.child(named: "MenuItems")?.valuesOfChildren()
     let restrictions: [Restriction]? = try? xml.child(named: "Restrictions")?.children.decodeAll()
     
@@ -90,6 +92,24 @@ extension Submenu: XMLTreeDecodable {
 }
 
 extension Submenu: Hideable {}
+
+//extension Submenu {
+//  public init(id: String,
+//    name: String,
+//    description: String,
+//    isVisible: String,
+//    isSelectable: String,
+//    sourceSubMenuId: String,
+//    isShowHeader: String,
+//    supportedOrderModes: String,
+//    menuItemIds: [String]?,
+//    restrictions: [Restriction]?,
+//    customFields: String?) {
+//
+//
+//  }
+//
+//}
 
 //extension Submenu {
 //  public var availableMenuItems: [MenuItem] {

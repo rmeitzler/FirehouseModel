@@ -51,7 +51,7 @@ public struct MenuItem {
   public var salesItemIds: [String]?
   public var salesGroups: String?
   public var restrictions: [Restriction]?
-  public var customFields: String?
+  public var customFields: [String: String]?
   
   //public var saleItems: [SalesItem]
   public var breadType: BreadType
@@ -115,7 +115,7 @@ extension MenuItem: Decodable {
       salesItemIds = try values.decodeIfPresent([String].self, forKey: .salesItemIds)
       salesGroups = try values.decodeIfPresent(String.self, forKey: .salesGroups)
       restrictions = try values.decodeIfPresent([Restriction].self, forKey: .restrictions)
-      customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
+      customFields = try values.decodeIfPresent([String:String].self, forKey: .customFields)
       //saleItems = []
     
       let isSandwich = MenuItem.isSandwich(id)
@@ -134,6 +134,14 @@ extension MenuItem: XMLTreeDecodable {
     }
     
     let restrictions: [Restriction]? = try? xml.child(named: "Restrictions")?.children.decodeAll()
+    
+    var customFields: [String:String]?
+    let tempFields = xml.child(named: "CustomFields")?.children ?? []
+    for (key,val) in tempFields.map({ ($0.attributes["Name"], $0.attributes["Value"]) }) {
+      if let k = key, let v = val {
+        customFields?[k] = v
+      }
+    }
     
     let isSandwich = MenuItem.isSandwich(try xml.attr("Id"))
     let isKids = MenuItem.isKids(try xml.attr("Id"))
@@ -161,7 +169,7 @@ extension MenuItem: XMLTreeDecodable {
                   salesItemIds: salesItemIds,
                   salesGroups: xml.attrIfPresent("SalesGroup"),
                   restrictions: restrictions,
-                  customFields: xml.attrIfPresent("CustomFields"),
+                  customFields: customFields,//xml.attrIfPresent("CustomFields"),
                   //saleItems: [],
                   breadType: isSandwich ? .white : .none,
                   size: isKids ? .kids : (isSandwich ? .medium : .none)
@@ -172,9 +180,6 @@ extension MenuItem: XMLTreeDecodable {
 
 
 extension MenuItem {
-//  public func availableSalesItems() -> [SalesItem] {
-//    return saleItems.filter({$0.isVisible.lowercased() == "true"})
-//  }
   
   public static func isKids(_ itemId: String) -> Bool {
     return MenuItem.kidsIds.contains(itemId)
@@ -191,25 +196,6 @@ extension MenuItem {
   public func isSandwich() -> Bool {
     return MenuItem.sandwichIds.contains(id)
   }
-  
-//  public func defaultSalesItem() -> SalesItem? {
-//    var matches: [SalesItem] = []
-//    for itm in availableSalesItems() {
-//      if isSandwich() {
-//        if itm.name.lowercased().contains(breadType.rawValue) && itm.name.lowercased().contains(size.rawValue) {
-//          matches.append(itm)
-//        }
-//      } else if itm.id == defaultItemId {
-//        matches.append(itm)
-//      }
-//    }
-//
-//    if let match = matches.first {
-//      print("default_match:\(match.name)")
-//      return match
-//    }
-//    return nil
-//  }
   
 }
 

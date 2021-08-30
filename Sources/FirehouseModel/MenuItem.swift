@@ -137,7 +137,9 @@ extension MenuItem: XMLTreeDecodable {
     
     var customFields: [String:String]?
     let tempFields = xml.child(named: "CustomFields")?.children ?? []
+    print("tempFields:\(tempFields)")
     for (key,val) in tempFields.map({ ($0.attributes["Name"], $0.attributes["Value"]) }) {
+      print("k:\(key),v:\(val)")
       if let k = key, let v = val {
         customFields?[k] = v
       }

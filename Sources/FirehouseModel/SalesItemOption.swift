@@ -19,7 +19,7 @@ public struct SalesItemOption {
   public var itemOptionSetId: String
   public var sourceModifierId: String
   public var taxGroupId: String
-  public var customFields: String?
+  public var customFields: [String: String]?
 }
 
 extension SalesItemOption: Decodable {
@@ -50,7 +50,7 @@ extension SalesItemOption: Decodable {
     itemOptionSetId = try values.decode(String.self, forKey: .itemOptionSetId)
     sourceModifierId = try values.decode(String.self, forKey: .sourceModifierId)
     taxGroupId = try values.decode(String.self, forKey: .taxGroupId)
-    customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
+    customFields = try values.decodeIfPresent([String:String].self, forKey: .customFields)
   }
 }
 
@@ -60,6 +60,17 @@ extension SalesItemOption: Hashable {
 
 extension SalesItemOption: XMLTreeDecodable {
   public init(from xml: XMLTree) throws {
+    var customFields: [String:String]?
+    let tempFields = xml.child(named: "CustomFields")?.children ?? []
+    for (key,val) in tempFields.map({ ($0.attributes["Name"], $0.attributes["Value"]) }) {
+      if let k = key, let v = val {
+        if customFields == nil {
+          customFields = [:]
+        }
+        customFields?[k] = v
+      }
+    }
+    
     try self.init(id: xml.attr("Id"),
                   modifierId: xml.attr("ModifierId"),
                   name: xml.attr("Name"),
@@ -70,7 +81,8 @@ extension SalesItemOption: XMLTreeDecodable {
                   itemOptionSetId: xml.attr("ItemOptionSetId"),
                   sourceModifierId: xml.attr("SourceModifierId"),
                   taxGroupId: xml.attr("TaxGroupId"),
-                  customFields: xml.attrIfPresent("CustomFields"))
+                  customFields: customFields//xml.attrIfPresent("CustomFields"))
+                  )
   }
 }
 

@@ -28,7 +28,7 @@ public struct OptionGroup {
   
   public var options: [Option]?
   
-  public var customFields: String?
+  public var customFields: [String: String]?
 }
 
 extension OptionGroup: Decodable {
@@ -88,6 +88,17 @@ extension OptionGroup: XMLTreeDecodable {
       throw XMLTreeError.couldNotDecodeClass(String(describing: [Option].self))
     }
     
+    var customFields: [String:String]?
+    let tempFields = xml.child(named: "CustomFields")?.children ?? []
+    for (key,val) in tempFields.map({ ($0.attributes["Name"], $0.attributes["Value"]) }) {
+      if let k = key, let v = val {
+        if customFields == nil {
+          customFields = [:]
+        }
+        customFields?[k] = v
+      }
+    }
+    
     try self.init(id: xml.attr("Id"),
                   isFolder: xml.attr("IsFolder"),
                   name: xml.attr("Name"),
@@ -105,7 +116,8 @@ extension OptionGroup: XMLTreeDecodable {
                   freeModifiers: xml.attr("FreeModifiers"),
                   hideModifier: xml.attr("HideModifier"),
                   options: options,
-                  customFields: xml.attrIfPresent("CustomFields"))
+                  customFields: customFields//xml.attrIfPresent("CustomFields"))
+                  )
   }
 }
 

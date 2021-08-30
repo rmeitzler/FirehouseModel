@@ -73,7 +73,7 @@ extension OptionGroup: Decodable {
     freeModifiers = try values.decode(String.self, forKey: .freeModifiers)
     hideModifier = try values.decode(String.self, forKey: .hideModifier)
     options = try values.decodeIfPresent([Option].self, forKey: .options)
-    customFields = try values.decodeIfPresent(String.self, forKey: .customFields)
+    customFields = try values.decodeIfPresent([String:String].self, forKey: .customFields)
   }
 }
 
